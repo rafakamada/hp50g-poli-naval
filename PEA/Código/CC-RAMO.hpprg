@@ -1,0 +1,56 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+@FERRAMENTA PARA FACILITAR O INPUT DE RAMOS
+´ {-27 -103 -105 -98 -97} SF
+´
+{'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'} PURGE
+{'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'} 'FIC' STO
+
+"N⁄MERO DE EQUA«’ES"
+"
+"
+INPUT OBJç 
+'n' STO
+
+n çARRY
+
+1 n
+FOR K
+    'FIC(K)' EVAL
+NEXT
+n çARRY
+
+SWAP 
+DUP
+
+'EQS' STO
+SWAP
+ª
+'SIST' STO
+
+"ADICIONAR RAMO"
+{
+{ "Fem" "SOMA DAS Fem NO RAMO"  }
+{ "RESIST NCIAS" "SOMA DAS RESIST NCIAS NO RAMO"  }
+{ "CORRENTES" "SOMA DAS CORRENTES FICTÕCIAS"  }
+}
+1
+{ }
+{ }
+
+
+
+INFORM DROP OBJç DROP
+* -
+
+´
+DUP 'PASTE' STO
+ª
+'COPY' STO
+
+ª

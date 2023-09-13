@@ -1,0 +1,103 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+{-27 -103 -105 -98 -97} SF @FLAGS QUE EU NÃO SEI O QUE SÃO, MAS USEI ANTES
+
+@APAGAR ALGUMAS VARI´[AVEIS PRA NÃO DAR PROBLEMA
+{'a' 'ScargaF' 'IsF' 'EsF' 'EpF' 'I´pF' 'Zeqm'
+ 'ImF' 'IpF' 'VpF' 'Prp' 'Prs' 'Pm'  'Pcarga' 
+ '”' 'SpF'} 
+PURGE
+
+"DADOS NOMINAIS"
+{
+"Ep"
+"Es"
+{"Vcarga" "TENSÃO NA CARGA"}
+{ "Scarga" "POTÊNCIA NOMINAL DA CARGA"  }
+{"fp" "FATOR DE POTÊNCIA"}
+}
+2
+{ }
+{ }
+INFORM DROP
+{'Ep' 'Es' 'Vcarga' 'Scarga' 'fp'} STO
+
+
+"DADOS DO TRANSFORMADOR"
+{
+{ "rp" "RESISTÊNCIA DO PRIMÁRIO"  }
+{ "Xdp" "REATÂNCIA DO PRIMÁRIO"  }
+{ "rs" "RESISTÊNCIA DO SECUNDÁRIO"  }
+{ "Xds" "REATÂNCIA DO SECUNDÁRIO"  }
+{ "Rm" "RESISTÊNCIA DO NÚCLEO"  }
+{ "Xm" "REATÂNCIA DO NÚCLEO"  }
+}
+2
+{ }
+{ }
+INFORM DROP
+
+{'rp' 'Xdp' 'rs' 'Xds' 'Rm' 'Xm'} STO
+
+Vcarga 'VsF' STO
+
+"RELAÇÃO DE ESPIRAS"
+'a = Ep/Es' DUP EVAL DEF
+
+
+
+"FASOR SCARGA: scarga €arccos(fp)"
+DEG @MUDAR PRA GRAUS
+CYLIN @COORDENADAS CILÍNDRICAS
+'ScargaF = Scarga*fp + i*Scarga*SIN(ACOS(fp))'
+DUP EVAL DEF
+
+"FASOR CORRENTE NO SECUNDÁRIO"
+'IsF = ScargaF/VsF' 
+"tem que conjugar"
+'ScargaF/VsF' EVAL CONJ
+'IsF' SWAP = DEF 
+
+"KIRCHOFF NA MALHA 2aria"
+'EsF = IsF * (rs + i*Xds) + VsF' DUP EVAL DEF
+
+"RELAÇÃO ENTRE Ep Es IpLINHA Is"
+'EpF = a*EsF' DUP EVAL DEF
+'I´pF = IsF/a' DUP EVAL DEF
+
+"CORRENTE Im"
+'Zeqm = (Rm*i*Xm)/(Rm + i*Xm)' DUP EVAL DEF
+'ImF = EpF/Zeqm' DUP EVAL DEF
+         
+"LEI DE KIRCHOFF PRA Ip, Im, I´p"
+'IpF = I´pF + ImF' DUP EVAL DEF
+
+"KIRCHOFF NO PRIMÁRIO"
+'VpF = EpF + (rp + i*Xdp)*IpF' DUP EVAL DEF
+
+
+"PERDAS NAS BOBINAS"
+'Prp = rp*ABS(IpF)^2' DUP EVAL DEF
+'Prs = rs*ABS(IsF)^2' DUP EVAL DEF
+
+"HISTERESE E FOUCAULT"
+'Pm = (ABS(EpF)^2)/Rm' DUP EVAL DEF
+
+"RENDIMENTO DO TRANSFORMADOR"
+'Pcarga = RE(ScargaF)' DEF
+'Perdas = Prp + Prs + Pm' DEF
+'” = Pcarga/(Pcarga + Perdas)' DUP EVAL DEF
+
+"POTÊNCIA COMPLEXA CONSUMIDA"
+'SpF = VpF*CONJ(IpF)' DUP EVAL DEF
+ 
+
+
+
+»

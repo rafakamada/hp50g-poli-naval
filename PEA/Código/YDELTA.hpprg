@@ -1,0 +1,12 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+'Za = (Zab *Zac)/(Zab+Zbc+Zac)'
+'Zb = (Zab *Zbc)/(Zab+Zbc+Zac)'
+'Zc = (Zac *Zbc)/(Zab+Zbc+Zac)'
+»

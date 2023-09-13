@@ -1,0 +1,21 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+«  @LEMBRAR DE APAGAR CLEAR
+DEG CYLIN
+"AS CORRENTES DE 
+LINHA E DE
+FASE SÃO IGUAIS"
+{'Van'} PURGE
+(1 €120) 'Œ' STO
+
+'Van' {'Œ^2' 'Œ'}  *
+
+{'Vbn' 'Vcn'} STO
+
+'Van' {'1 - Œ^2' 'Œ^2 - Œ' 'Œ - 1'} *
+{'Vab' 'Vbc' 'Vca'} STO
+»

@@ -1,0 +1,57 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+CLEAR 
+
+@50 '˜X' STO
+@'-10' '˜Y' STO
+@40 '™XY' STO
+
+""
+{
+"˜X"
+"˜Y"
+"™XY"
+}
+1
+{ }
+{ }
+INFORM DROP
+{'˜X', '˜Y', '™XY'} STO
+
+"˜MÉDIO (RAIO DA CIRCUNFERENCIA)"
+'(˜X + ˜Y)/2' '˜MED' STO
+'˜MED = (˜X + ˜Y)/2'
+˜MED
+EVAL
+
+
+"˜MAX"
+'˜MED +ƒ(((˜X-˜Y)/2)^2 + ™XY^2)' '˜MAX' STO
+'˜MAX = ˜MED +ƒ(((˜X-˜Y)/2)^2 + ™XY^2)'
+˜MAX
+ EVAL
+
+"˜MIN"
+'˜MED - ƒ(((˜X-˜Y)/2)^2 + ™XY^2)' '˜MIN' STO
+'˜MIN = ˜MED -ƒ(((˜X-˜Y)/2)^2 + ™XY^2)'
+˜MIN
+ EVAL
+
+"ÂNGULO MAX NORMAL"
+'TAN(2*•P) = (2*™XY)/(˜X-˜Y)' 
+
+"™MAX (RAIO DA CIRCUNFERÊNCIA)"
+'™MAX = ƒ(((˜X-˜Y)/2)^2 +™XY^2)'
+'ƒ(((˜X-˜Y)/2)^2 +™XY^2)' '™MAX' STO
+™MAX EVAL
+
+"ÂNGULO MAX CISALHAMENTO"
+'TAN(2*•C) = -(˜X-˜Y)/(2*™XY)'
+ 
+»

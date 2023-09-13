@@ -1,0 +1,20 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+"INDUTÂNCIA"
+'L = –/I' DUP 'INDU' STO
+
+"FLUXO CONCATENADO"
+'– = N*Ø' DUP 'FCON' STO
+
+"FORÇA MAGNETOMOTRIZ"
+'Fmm = Ø*Rc' DUP 'FORCA' STO
+
+"RELAÇÃO N,Fmm E I"
+'Fmm = N*I' DUP 'FNI' STO
+»

@@ -1,0 +1,37 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´
+@[[1 2 3 11]
+@[4 5 6 32]
+@[7 8 9 87]]
+
+
+@2 3 VAI SER O PIVO
+
+2 çLIST 'EIXO' STO
+'MATRIZ' STO
+
+MATRIZ
+'MATRIZ(EIXO(1),EIXO(2))^-1' EVAL 'EIXO(1)' EVAL RCI
+
+1 MATRIZ SIZE 1 GET
+FOR I
+    IF 'IãEIXO(1)' THEN
+    '-MATRIZ(I,EIXO(2))' EVAL 
+    'EIXO(1)' EVAL
+    I      
+    RCIJ      
+    END    
+NEXT
+
+
+
+
+{'MATRIZ' 'EIXO'} PURGE
+
+ª

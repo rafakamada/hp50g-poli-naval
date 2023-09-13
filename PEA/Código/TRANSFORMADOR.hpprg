@@ -1,0 +1,92 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+« 
+{-27 -103 -105 -98 -97} SF @FLAGS QUE EU NÃO SEI O QUE SÃO, MAS USEI ANTES
+
+"DADOS GERAIS"
+{
+"Ep"
+"Es"
+{"VpF" "FONTE DE TENSÃO NO PRIMÁRIO"}
+{"SpF" "POT ABS NO PRIM(complexo)"}
+}
+2
+{ }
+{ }
+INFORM DROP
+{'Ep' 'Es' 'VpF' 'SpF'} STO
+
+
+"DADOS DO TRANSFORMADOR"
+{
+{ "rp" "RESISTÊNCIA DO PRIMÁRIO"  }
+{ "Xdp" "REATÂNCIA DO PRIMÁRIO"  }
+{ "rs" "RESISTÊNCIA DO SECUNDÁRIO"  }
+{ "Xds" "REATÂNCIA DO SECUNDÁRIO"  }
+{ "Rm" "RESISTÊNCIA DO NÚCLEO"  }
+{ "Xm" "REATÂNCIA DO NÚCLEO"  }
+}
+2
+{ }
+{ }
+INFORM DROP
+
+{'rp' 'Xdp' 'rs' 'Xds' 'Rm' 'Xm'} STO
+
+
+
+{'IpF' 'SbpF' 'Pbp' 'EpF' 'Zeqm' 'ImF' 'SmF'
+'Pm' 'a' 'IsF' 'SbsF' 'Pbs' 'VcargaF' 'ScargaF'
+'Pcarga'} PURGE
+
+"POTÊNCIA NA BOBINA"
+DEG @MUDAR PRA GRAUS
+CYLIN @COORDENADAS CILÍNDRICAS
+"corrente no primário"
+'IpF = CONJ(SpF/VpF)' DUP EVAL DEF
+
+"potência complexa na bobina"
+'SbpF = (rp + i*Xdp)*IpF*CONJ(IpF)' DUP EVAL DEF
+
+"potência ativa"
+'Pbp = RE(SbpF)' DUP EVAL DEF
+
+"POTÊNCIA NO NÚCLEO"
+"poência na espira"
+'EpF = VpF - IpF*(rp - i*Xdp)' DUP EVAL DEF
+
+"corrente no núcleo"
+'Zeqm = (Rm*i*Xm)/(Rm + i*Xm)' DUP EVAL DEF
+'ImF = EpF/Zeqm' DUP EVAL DEF
+
+"potência complexa no núcleo"
+'SmF = EpF*CONJ(ImF)' DUP EVAL DEF
+
+"potência ativa"
+'Pm = RE(SmF)' DUP EVAL DEF
+
+"POTÊNCIA NA BOBINA SECUNDÁRIO"
+"corrente no secundário"
+'a = Ep/Es' DUP EVAL DEF
+'IsF = (IpF - ImF)*a' DUP EVAL DEF
+"potência complexa"
+'SbsF = (rs + i*Xds)*IsF*CONJ(IsF)' DUP EVAL DEF
+"potência ativa"
+'Pbs = RE(SbsF)' DUP EVAL DEF
+
+"POTÊNCIA ABSORVIDA PELA CARGA"
+'VcargaF = EpF/a - IsF*(rs + i*Xds)' DUP EVAL DEF
+"potência complexa"
+'ScargaF = VcargaF*CONJ(IsF)' DUP EVAL DEF
+"potência ativa"
+'Pcarga = RE(ScargaF)' DUP EVAL DEF
+
+"MÓDULO TENSÃO NA CARGA"
+'ABS(VcargaF)' VcargaF ABS =
+
+»

@@ -1,0 +1,407 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+DIR
+  PH1
+´
+CLEAR
+0 105 - CF @DESATIVA O APPROX
+
+
+@[0 9 18 36 54 72 90 108 126 144 162 171 180]
+@[3.24 6.45 9.33 13.21 14.01 14 14 14 14 13.99 13.53 9.13 0.55]
+@1.025
+@'ó' STO
+@'B' STO
+@'A' STO
+
+
+
+
+"COLUNA A - BALIZAS
+INSIRA CADA ELEMENTO
+DENTRO DE []
+SEPARADO POR UM
+ESPA«O (TECLA SPC)
+"
+"
+"
+INPUT OBJç 'A' STO
+
+"COLUNA B - MEIA BOCA
+INSIRA CADA ELEMENTO
+DENTRO DE []
+SEPARADO POR UM
+ESPA«O (TECLA SPC)
+"
+"
+"
+INPUT OBJç 'B' STO
+
+
+"MASSA ESPECÕFICA
+DA ¡GUA
+EM TONELADAS/m^3"
+"
+"
+INPUT OBJç 'ó' STO
+
+
+
+
+
+
+
+
+
+A SIZE 1 GET 'TAM' STO
+
+
+@ESPA«AMENTO S: O MAIOR ESPA«AMENTO REGISTRADO
+0 's' STO
+1 TAM 1 -
+FOR K
+    A K 1 + GET
+    A K GET -
+    'a' STO
+    IF a s > THEN
+       a 's' STO
+    END
+NEXT
+
+"ESPA«AMENTO PARA O SIMPSON"
+s "s" çTAG
+
+@DEFINIR OS COEFICIENTE DE SIMPS
+
+@primeiro membro: PEGAR A DISTANCIA E DIVIDIR POR S
+A 2 GET
+A 1 GET -
+s / çNUM
+@do segundo ao pen˙ltimo
+2 TAM 1 -
+FOR K
+    IF K 2 MOD 0 == THEN
+       A K 1 + GET
+       A K GET -
+       s /
+       4 * çNUM
+    ELSE
+       A K GET
+       A K 1 - GET -
+       s /
+
+       A K 1 + GET
+       A K GET -
+       s /
+
+       + çNUM
+    END
+NEXT
+
+@⁄LTIMO
+A TAM GET
+A TAM 1 - GET
+- s / çNUM
+
+TAM çARRY
+çNUM
+'C' STO
+0 105 - SF @ATIVA O APPROX
+"COEFICIENTES DE SIMPSON"
+C
+
+@COLUNA D: B*C
+B C HADAMARD çNUM
+'D' STO
+
+"COLUNA D: B*C"
+D
+
+@COLUNA E: POSICAO RELATIVA A SECAO MESTRA
+A TAM GET
+2 /
+'MNAU' STO
+1 TAM
+START
+MNAU
+NEXT
+TAM çARRY
+A -
+s / çNUM
+
+'E' STO
+
+"COLUNA E: POSICAO RELATIVA A S MESTRA"
+E
+
+
+@COLUNA F: D*E
+D E HADAMARD çNUM
+'F' STO
+
+"COLUNA F: D*E"
+F
+
+
+
+@COLUNA G: E^2
+E E HADAMARD çNUM
+'G' STO
+
+"COLUNA G: E^2"
+G
+
+
+@COLUNA H: G*D
+G D HADAMARD çNUM
+'H' STO
+
+"COLUNA H: G*D"
+H
+
+
+@COLUNA I: B^3
+B B B HADAMARD HADAMARD çNUM
+'I' STO
+
+"COLUNA I: B^3"
+I
+
+@COLUNA J: I*C
+I C HADAMARD çNUM
+'J' STO
+
+"COLUNA J: I*C"
+J
+
+
+@SOMATORIAS
+D AXL ÖLIST
+'Ö1' STO
+
+"Ö1: COLUNA D"
+Ö1
+
+
+"Ö2: COLUNA F"
+F AXL ÖLIST DUP
+'Ö2' STO
+
+"Ö3: COLUNA H"
+H AXL ÖLIST DUP
+'Ö3' STO
+
+"Ö4: COLUNA J"
+J AXL ÖLIST DUP
+'Ö4' STO
+
+
+"C¡LCULO DAS PROPRIEDADES"
+'AWL = 2*(s/3) * Ö1'
+Ö1 2 s * * 3 /
+DUP
+'AWL' STO
+"AWL[m^2]" çTAG
+
+
+
+
+'CWL = AWL/(L*B)'
+
+A TAM GET 'L' STO
+B TAM 2/ GET  2 *'b' STO @TEM QUE MULTIPLICAR POR 2 PORQUE A«LIE … MEIA BOCA
+
+
+'AWL/(L*b)' EVAL
+DUP
+'CWL' STO
+"CWL" çTAG
+
+'TCM = AWL * (ó/100)'
+AWL ó 100 / *
+DUP
+'TCM' STO
+"TCM[t/cm]" çTAG
+
+
+
+'LCF = (Ö2/Ö1) * s'
+s Ö2 Ö1 / *
+DUP
+'LCF' STO
+"LCF[m]" çTAG
+
+
+'IL = 2*(s^3/3) * Ö3'
+'2*(s^3/3) * Ö3' EVAL
+DUP
+'IL' STO
+"IL[m^4]" çTAG
+
+
+
+
+'Ilcf = IL - AWL *LCF^2'
+'IL - AWL *LCF^2' EVAL
+DUP
+'Ilcf' STO
+"Ilcf[m^4]" çTAG
+
+
+
+'IT = 2 * (s/9) *Ö4'
+'2 * (s/9) *Ö4' EVAL
+DUP
+'IT' STO
+"IT[m^4]" çTAG
+
+
+0 105 - CF @DESATIVA O APPROX
+ª
+ PH2
+  
+´ CLEAR
+'X' PURGE
+@[9.56 46.05 103.66 220.63 282.57 291.57 291.54 291.54 291.54 290.84 260.51 149.57 0.58]
+@'B2' STO
+
+"COL. B AREA DA BALIZA
+INSIRA CADA ELEMENTO
+DENTRO DE []
+SEPARADO POR UM
+ESPA«O (TECLA SPC)
+"
+"
+"
+INPUT OBJç 'B2' STO
+
+
+
+
+"CALADO DE OPERA«√O"
+"
+"
+INPUT OBJç 'T' STO
+
+
+
+
+
+
+"KG
+SE NAO SOUBER
+DIGITAR A LETRA X"
+"
+"
+INPUT OBJç 'KG' STO
+
+
+
+
+
+
+0 105 - SF @ATIVA O APPROX
+"COEFICIENTES DE SIMPSON"
+C
+
+
+
+"COLUNA D: B*C"
+B2 C HADAMARD DUP
+'D' STO
+
+
+
+
+"COLUNA E: POSICAO RELATIVA A S MESTRA"
+E
+
+"COLUNA F: D*E"
+D E HADAMARD DUP
+'F' STO
+
+
+"SOMAT”RIAS"
+"Ö1: COLUNA D"
+D AXL ÖLIST DUP
+'Ö1' STO
+
+
+"Ö2: COLUNA F"
+F AXL ÖLIST DUP
+'Ö2' STO
+
+
+"PROPRIEDADES"
+'Ç = (s/3) * Ö1'
+'(s/3) * Ö1' EVAL DUP
+'Ç' STO
+"Ç[m^3]" çTAG
+
+
+'õ = ó*g*Ç'
+'ó*9.81*Ç/10' EVAL DUP
+'õ' STO
+"õ[t]" çTAG
+
+
+
+'LCB = s *(Ö2/Ö1)'
+'s *(Ö2/Ö1)' EVAL DUP
+'LCB' STO
+"LCB[m]" çTAG
+
+
+
+'BML = IL/Ç'
+'IL/Ç' EVAL DUP
+'BML' STO
+"BML[m]" çTAG
+
+
+'BMT = IT/Ç'
+'IT/Ç' EVAL DUP
+'BMT' STO
+"BMT[m]" çTAG
+
+
+B2 TAM 2/ GET 'ASECMESTRA' STO
+
+'CP = Ç/(L*ASECMESTRA)'
+'Ç/(L*ASECMESTRA)' EVAL DUP
+'CP' STO
+"CP" çTAG
+
+
+@"O CB VAI DEPENDER DE QUAL CALADO VAI OPERAR"
+'CB = Ç/(L*B*T)'
+'Ç/(L*b*T)' EVAL DUP
+'CB' STO
+"CB" çTAG
+
+
+@"O KB [m] VAI DEPENDER DE QUAL CALADO VAI OPERAR"
+'KB = T * (AWL/(AWL + (Ç/T)))'
+'T * (AWL/(AWL + (Ç/T)))' EVAL DUP
+'KB' STO
+"KB" çTAG
+
+
+'GML = BML - KG + KB'
+'BML - KG + KB' EVAL DUP
+'GML' STO
+"GML" çTAG
+
+'MTcm = (õ*GML)/(100 *L)'
+'(õ*GML)/(100 *L)' EVAL DUP
+'MTcm' STO
+"MTcm" çTAG
+
+
+ª
+END

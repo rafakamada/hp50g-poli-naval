@@ -1,0 +1,25 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+"RELUTÂNCIA C"
+'Rc = Lc/(µc*Ac)' DUP'RELc' STO
+'µc = µr*µ0'  DUP 'MI' STO
+
+"RELUTÂNCIA G"
+'Rg = Lg/(µ0*Ag)' DUP 'RELg' STO
+
+"FLUXO PHI"
+'Ø = Bc*Ac' DUP 'PHI' STO
+
+"FORÇA MAGNETOMOTRIZ"
+'Fmm = Ø*(Rg + Rc)' DUP 'FORCA' STO
+
+"RELAÇÃO N,Fmm E I"
+'Fmm = N*I' DUP 'FNI' STO
+
+»

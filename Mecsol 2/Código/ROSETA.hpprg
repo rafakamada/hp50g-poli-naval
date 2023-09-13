@@ -1,0 +1,44 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+
+«
+{'“X' '“Y' '‘XY'} PURGE
+
+"ÂNGULOS EM GRAUS"
+{
+"“1"
+"•1"
+"“2"
+"•2"
+"“3"
+"•3"
+}
+2
+{ }
+{ }
+INFORM DROP {'“1' '•1' '“2' '•2' '“3' '•3'}
+STO
+
+DEG
+'“1 = “X * COS(•1)^2 + “Y * SIN(•1)^2 + ‘XY*SIN(•1)*COS(•1)'
+EVAL
+'“2 = “X * COS(•2)^2 + “Y * SIN(•2)^2 + ‘XY*SIN(•2)*COS(•2)'
+EVAL
+'“3 = “X * COS(•3)^2 + “Y * SIN(•3)^2 + ‘XY*SIN(•3)*COS(•3)'
+EVAL
+
+3 ARRY 
+0 105 - CF
+['“X' '“Y' '‘XY'] LINSOLVE
+SWAP DROP SWAP DROP 
+
+{'“1 = “X * COS(•1)^2 + “Y * SIN(•1)^2 + ‘XY*SIN(•1)*COS(•1)'
+'“2 = “X * COS(•2)^2 + “Y * SIN(•2)^2 + ‘XY*SIN(•2)*COS(•2)'
+'“3 = “X * COS(•3)^2 + “Y * SIN(•3)^2 + ‘XY*SIN(•3)*COS(•3)'}
+SWAP
+»

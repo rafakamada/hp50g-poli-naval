@@ -1,0 +1,90 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+
+´ DEG
+@APAGAR ESSE CLEAr
+ @FERRAMENTA PARA FACILITAR O INPUT DE RAMOS 
+  @EM CORRENTE ALTERNADA
+{-27 -103 -105 -98 -97} SF
+CYLIN
+@funÁ„o para montar o sist de equaÁıes:
+´
+{'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'} PURGE
+{'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'} 'FIC' STO
+
+"N⁄MERO DE EQUA«’ES"
+"
+"
+INPUT OBJç
+'n' STO
+
+n çARRY
+
+1 n
+FOR K
+    'FIC(K)' EVAL
+NEXT
+n çARRY
+
+SWAP
+DUP
+
+'EQS' STO SWAP
+ª
+'SIST' STO
+
+
+´
+DEG
+ª
+'GRAUS' STO @PRA LEMBRAR DE TRRANSFORMAR PRA GRAUS
+
+
+
+
+'i*ö*L' 'ZL' STO
+'-i/(ö*C)' 'ZC' STO
+
+@FORMATO DO RAMO:
+@ {FEM, FREQ, R, L, C, I}
+@{200 628.32 20 95E-3 39.97E-6 'A'}
+
+
+"ADICIONAR RAMO"
+{
+{ "Fem" "VALOR EFICAZ Fem "  }
+{ "FASE" "FASE DA Fem" }
+{ "f" "FREQU NCIA EM HZ"  }
+{ "R" "SOMA DAS RESIST NCIAS DO RAMO"  }
+{ "L" "SOMA DAS INDUT¬NCIAS DO RAMO"  }
+{ "C" "SOMA DAS CAPACIT¬NCIAS DO RAMO"  }
+{ "I" "SOMA DAS CORRENTES"  }
+}
+2
+{ }
+{NOVAL NOVAL F NOVAL NOVAL NOVAL NOVAL }
+INFORM DROP
+
+
+{'Vef' 'ÿ''f' 'R' 'L' 'C' 'I'} STO 
+'Vef*COS(ÿ) + Vef*SIN(ÿ)*i' 'V' STO
+
+f 'F' STO
+
+'2*á*f' 'ö' STO
+
+'V - I * (R + ZL + ZC )' EVAL
+
+´
+DUP 'PASTE' STO
+ª
+'COPY' STO
+
+@{'V' 'ö' 'R' 'L' 'C' 'I'} PURGE
+
+ª

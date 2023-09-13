@@ -1,0 +1,13 @@
+
+2 'h' STO
+6 'b' STO
+9 'l' STO
+
+
+
+1 '‘' STO
+20 '•' STO
+45.75 'porc' STO
+
+
+2000 '›' STO

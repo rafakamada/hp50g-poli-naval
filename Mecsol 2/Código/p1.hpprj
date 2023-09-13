@@ -1,0 +1,22 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+RAD
+'Pcr = (‡^2*E*I)/Lf^2'
+'EQ1' STO
+
+
+
+'yMAX = EXC*(1/COS((‡/2)*ƒ(P/Pcr))-1)'
+'EQ2' STO
+
+'˜MAX = (P/A)*(1+((EXC*c)/r^2)*(1/COS((‡/2)*ƒ(P/Pcr))))'
+'EQ3' STO
+
+{'Pcr', 'P', 'yMAX', '˜MAX', 'E', 'I','Lf', 'EXC', 'A', 'r', 'c'} 'Var' STO
+»

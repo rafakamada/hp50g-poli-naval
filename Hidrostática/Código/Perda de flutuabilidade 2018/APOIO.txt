@@ -1,0 +1,44 @@
+
+
+
+
+
+"PERDA DE FLUTUABILIDADE"
+{
+{ "L" "COMPRIMENTO EM METROS"  }
+{ "B" "BOCA EM METROS"  }
+{ "H" "CALADO EM METROS"  }
+{ "KG" "ALTURA DO CG EM METROS"  }
+{ "ANTEPARA" "COMPRIMENTO DAS ANTEPARAS"  }
+{ "LONGITUDINAL" "A. LONGITUDINAL (0 NAO, 1 SIM)"  }
+{ "rL" "DISTÂNCIA CG DO TANQUE E LCF"  }
+{ "µ" "PERMEABILIDADE DO V1 (0 A 1)"  }
+{ "µ_s" "PERM. DA SUPERFÍCIE(0 A 1)"  }
+}
+3
+{ }
+{ }
+INFORM DROP
+
+{'L','B','H','KG','Lc','LONG','rL','µ','µs'} STO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{300,50,20,7,60,1,0,1,1}
+{'L','B','H','KG','Lc','LONG','rL','µ','µs'} STO
+
+
+

@@ -1,0 +1,17 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+« CLEAR
+'u = M^2/(2*E*I)' DEF
+'M = -(P*X + (1/2)*w*X^2)' DEF
+
+{0 2 'P'}{'a' 'b' 'Pj'} STO
+
+{'U' '›'} PURGE
+
+'U = „(a,b, u, X)' DEF DROP
+»

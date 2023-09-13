@@ -1,0 +1,21 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+'Ns = (60 * f)/p'
+'VSYNC' STO
+
+'s = (Ns - Nr)/Ns*100' 
+'ESC1' STO
+
+'s = (šs - šr)/šs * 100' 
+'ESC2' STO
+
+"p são PARES DE POLOS"
+
+
+»

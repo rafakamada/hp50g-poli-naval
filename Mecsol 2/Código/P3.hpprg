@@ -1,0 +1,49 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+'-95' CF
+{-56,-97, -98, -22} SF
+
+{'M' 'E' 'I' 'P' 'A' 'T' 'G' 'J' 'fs' 'V'
+'u' 'U' '›'} 
+PURGE
+'u = M^2/(2*E*I) + P^2/(2*E*A) + T^2/(2*G*J) 
++ fs*V^2/(2*G*A)'
+'DENS' STO
+
+«
+{-105 -56} CF
+{-56} SF
+
+"CASTIGLIANO"
+{
+{ "[LIMITE DE INTEGRAÇÃO" "LIMITE INTEFIOR"  }
+{ "LIMITE DE INTEGRAÇÃO]" "LIMITE SUPERIOR"  }
+{ "DERIVAR EM" "variável na qual será aplicado o teorema"  }
+}
+1
+{ }
+{ }
+INFORM DROP
+
+{'a' 'b' 'Pj'} STO
+
+{'U' '›'} PURGE
+
+'U = „(a,b, u, X)' DEF DROP
+
+U Pj DERIV
+'TEMP' STO
+'› = TEMP' EVAL
+'TEMP' PURGE
+
+
+»
+'CASTG' STO
+
+»

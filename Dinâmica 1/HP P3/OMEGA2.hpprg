@@ -1,0 +1,38 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´ CLEAR
+
+'(ù2/ö2)^2 = (1+(1+m2/m1)*(ö2/ö1)^2+((1+(1+m2/m1)*(ö2/ö1)^2)^2-4*(ö2/ö1)^2)^(1/2))/(2*(ö2/ö1)^2)'
+'OM2' STO
+
+'X' PURGE
+
+
+
+
+"COLOCAR 'X' NA INC”GNITA"
+{
+"ù2"
+"ö1"
+"ö2"
+"m1"
+"m2"
+
+}
+2
+{ }
+{ }
+INFORM DROP
+{'ù2','ö1','ö2','m1','m2'} STO
+
+
+
+
+OM2
+
+ª

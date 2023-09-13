@@ -1,0 +1,380 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´
+DEG @DEIXA EM MODO MIL GRAU
+0 105 - SF @ATIVA O APPROX
+
+
+CLEAR
+
+
+"EF SUPERFÕCIE LIVRE"
+{
+{ "l" "COMPRIMENTO DO TANQUE [m]"  }
+{ "b" "LARGURA DO TANQUE [m]"  }
+{ "h" "ALTURA DO TANQUE [m]"  }
+{ "%" "0 A 100"  }
+{ "ï" "¬NGULO DE BANDA [GRAUS]"  }
+{ "ë" "PESO ESPECÕFICO DO LIQ. [tf/m^3]"  }
+{ "õ" "PESO DO NAVIO [tf]"  }
+}
+2
+{ }
+{ }
+INFORM DROP
+{'l','b','h','POR', 'ï', 'ë','õ'} STO
+
+
+
+"volume to tanque"
+'v = l*b*h*(POR/100)' DEF
+v EVAL "v" çTAG
+
+"·rea da figura 2d (plano yz)"
+'a = b * h * (POR/100)' DEF
+a EVAL "a" çTAG
+
+"posiÁ„o inicial do centroide"
+'yB = b/2' DEF
+yB EVAL "yB" çTAG
+
+
+"DEFINIR FORMA 2D FINAL"
+IF 'POR == 50' THEN
+   "‚ngulo m·ximo para ser tri‚ngulo"
+   'ïmax = ATAN(h/b)' DEF
+   ïmax EVAL "ïmAX" çTAG     
+   
+   IF 'ï>ïmax' THEN
+      "FORMA: TRAP…ZIO COM BASE MAIOR EMBAIXO"
+      
+      "dividir o trapÈzio em tri‚ngulo e ret‚ngulo"
+      "base do tri‚ngulo"   
+      'bT = h/TAN(ï)'  DEF
+      bT EVAL "bT" çTAG
+         
+      "·rea do ret‚ngulo"
+      'aR = a - (bT*h)/2'   DEF
+      aR EVAL "aR" çTAG
+
+      "base do ret‚ngulo == base menor"
+      'bR = aR/h'  DEF
+      bR EVAL "bR" çTAG
+   
+      "definir as coordenadas cartesiandas dos pontos do trapÈzio"
+      'b - (bT + bR)' EVAL @coordenada y
+      0  @coordenada z       
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+   
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+   
+      b
+      h
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+    
+      'b - bR' EVAL
+      h
+      2 çARRY  DUP 'P4' STO "P4" çTAG
+   
+      P1 1 GET
+      P2 1 GET
+      P3 1 GET
+      P4 1 GET 
+      P1 1 GET   
+      5 çARRY 'Y' STO   
+  
+      P1 2 GET
+      P2 2 GET
+      P3 2 GET
+      P4 2 GET
+      P1 2 GET
+      5 çARRY 'Z' STO   
+
+      'yB1 = (1/(6*a))*Ö(I=1,4,(Y(I) + Y(I+1))*(Y(I)*Z(I+1) - Y(I+1)*Z(I))'               
+      DEF DROP
+      yB1 EVAL "yB1" çTAG  
+   ELSE
+   IF 'ï<ïmax' THEN
+      "FORMA: TRAP…ZIO (tri‚ngulo em cima de ret‚ngulo)"
+      
+      "altura do tri‚ngulo"     
+      'hT = b *TAN(ï)' DEF
+      hT  EVAL "hT" çTAG
+
+      "·rea do ret‚ngulo"
+      'aR = a - (b*hT)/2' DEF
+      aR EVAL "aR" çTAG  
+
+      "altura do ret‚ngulo"
+      'hR = aR/b' DEF
+      hR EVAL "hR" çTAG          
+
+      "definir as coordenadas cartesiandas dos pontos do trapÈzio"
+      0 @COORDENADA Y
+      0  @coordenada z
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+
+      b
+      'hR +hT' EVAL
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+
+      0
+      hR EVAL
+      2 çARRY  DUP 'P4' STO "P4" çTAG
+            
+      P1 1 GET
+      P2 1 GET
+      P3 1 GET
+      P4 1 GET
+      P1 1 GET
+      5 çARRY 'Y' STO
+
+      P1 2 GET
+      P2 2 GET
+      P3 2 GET
+      P4 2 GET
+      P1 2 GET
+      5 çARRY 'Z' STO
+      
+      'yB1 = (1/(6*a))*Ö(I=1,4,(Y(I) + Y(I+1))*(Y(I)*Z(I+1) - Y(I+1)*Z(I))'
+      DEF DROP
+      yB1 EVAL "yB1" çTAG      
+   ELSE
+      "FORMA: TRI¬NGULO"   
+      "coordenadas cartesiandas da figura"      
+      0 @COORDENADA Y
+      0  @coordenada z
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+
+      b
+      h EVAL
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+
+      'b - bT' EVAL @coordenada y
+      0  @coordenada z
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+      
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+
+      b
+      hT
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+      P1 1 GET
+      P2 1 GET
+      P3 1 GET
+      P1 1 GET
+      4 çARRY 'Y' STO
+
+      P1 2 GET
+      P2 2 GET
+      P3 2 GET
+      P1 2 GET
+      4 çARRY 'Z' STO
+
+      'yB1 = (1/(6*a))*Ö(I=1,3,(Y(I) + Y(I+1))*(Y(I)*Z(I+1) - Y(I+1)*Z(I))'
+      DEF DROP
+      yB1 EVAL "yB1" çTAG      
+                                                            
+   END @END DO IF DE ï<MAX      
+   END @DO TETA>MAX
+   @AQUI V√O FICAR OS CASOS DE MENOS OU MAIS QUE 50%
+ELSE
+   "‚ngulo mÌnimo para ser tri‚ngulo"
+   'ïmin = ATAN(2*a/b^2)' DEF
+   ïmin EVAL "ïmin" çTAG
+
+   "‚ngulo m·ximo para ser tri‚ngulo"
+   'ïmax = ATAN((h^2)/(2*a))' DEF
+   ïmax EVAL "ïmax" çTAG
+
+   IF 'ï<ïmin' THEN
+      "FORMA: TRAP…ZIO (tri‚ngulo em cima de ret‚ngulo)"
+
+      "altura do tri‚ngulo"
+      'hT = b *TAN(ï)' DEF
+      hT  EVAL "hT" çTAG
+
+      "·rea do ret‚ngulo"
+      'aR = a - (b*hT)/2' DEF
+      aR EVAL "aR" çTAG
+
+      "altura do ret‚ngulo"
+      'hR = aR/b' DEF
+      hR EVAL "hR" çTAG
+
+      "definir as coordenadas cartesiandas dos pontos do trapÈzio"
+      0 @COORDENADA Y
+      0  @coordenada z
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+
+      b
+      'hR +hT' EVAL
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+
+      0
+      hR EVAL
+      2 çARRY  DUP 'P4' STO "P4" çTAG
+
+      P1 1 GET
+      P2 1 GET
+      P3 1 GET
+      P4 1 GET
+      P1 1 GET
+      5 çARRY 'Y' STO
+
+      P1 2 GET
+      P2 2 GET
+      P3 2 GET
+      P4 2 GET
+      P1 2 GET
+      5 çARRY 'Z' STO
+
+      'yB1 = (1/(6*a))*Ö(I=1,4,(Y(I) + Y(I+1))*(Y(I)*Z(I+1) - Y(I+1)*Z(I))'
+      DEF DROP
+      yB1 EVAL "yB1" çTAG
+
+   ELSE
+   IF 'ï>ïmax' THEN
+      "FORMA: TRAP…ZIO COM BASE MAIOR EMBAIXO"
+
+      "dividir o trapÈzio em tri‚ngulo e ret‚ngulo"
+      "base do tri‚ngulo"
+      'bT = h/TAN(ï)'  DEF
+      bT EVAL "bT" çTAG
+
+      "·rea do ret‚ngulo"
+      'aR = a - (bT*h)/2'   DEF
+      aR EVAL "aR" çTAG
+
+      "base do ret‚ngulo == base menor"
+      'bR = aR/h'  DEF
+      bR EVAL "bR" çTAG
+
+      "definir as coordenadas cartesiandas dos pontos do trapÈzio"
+      'b - (bT + bR)' EVAL @coordenada y
+      0  @coordenada z
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+
+      b
+      h
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+
+      'b - bR' EVAL
+      h
+      2 çARRY  DUP 'P4' STO "P4" çTAG
+
+      P1 1 GET
+      P2 1 GET
+      P3 1 GET
+      P4 1 GET
+      P1 1 GET
+      5 çARRY 'Y' STO
+
+      P1 2 GET
+      P2 2 GET
+      P3 2 GET
+      P4 2 GET
+      P1 2 GET
+      5 çARRY 'Z' STO
+
+      'yB1 = (1/(6*a))*Ö(I=1,4,(Y(I) + Y(I+1))*(Y(I)*Z(I+1) - Y(I+1)*Z(I))'
+      DEF DROP
+      yB1 EVAL "yB1" çTAG
+
+   ELSE
+      "FORMA: TRI¬NGULO"
+      "base e altura do tri‚ngulo"
+      'hT/bT = TAN(ï)'
+      '(hT*bT)/2 = a'
+      ['hT/bT = TAN(ï)','hT*bT/2 = a']
+      ['bT','hT']
+      b h 2 çARRY
+      'ï*á/180' EVAL 'ï' STO      
+      RAD
+      MSLV
+      DEG
+      'ï/(á/180)' EVAL 'ï' STO        
+      'SOLUC' STO DROP DROP
+
+      'SOLUC(1)' EVAL 'bT' STO
+      bT EVAL "bT" çTAG
+
+      'SOLUC(2)' EVAL 'hT' STO
+      hT EVAL "hT" çTAG
+      
+      "definir as coordenadas cartesiandas dos pontos do trapÈzio"
+      'b - bT' EVAL @COORDENADA Y
+      0  @coordenada z
+      2 çARRY  DUP 'P1' STO "P1" çTAG
+
+      b
+      0
+      2 çARRY  DUP 'P2' STO "P2" çTAG
+
+      b
+      'hT' EVAL
+      2 çARRY  DUP 'P3' STO "P3" çTAG
+      
+
+      P1 1 GET
+      P2 1 GET
+      P3 1 GET
+      P1 1 GET
+      4 çARRY 'Y' STO
+
+      P1 2 GET
+      P2 2 GET
+      P3 2 GET
+      P1 2 GET
+      4 çARRY 'Z' STO
+
+      'yB1 = (1/(6*a))*Ö(I=1,3,(Y(I) + Y(I+1))*(Y(I)*Z(I+1) - Y(I+1)*Z(I))'
+      DEF DROP
+      yB1 EVAL "yB1" çTAG
+   END  @MENOR QUE MIN
+   END @MAIO QUIE MAX  
+                                   
+END
+"VARIA«√O DO CENTRO DE VOLUME"
+'bb1 = yB1-yB'
+yB1 EVAL yB - EVAL DUP 'bb1' STO
+"bb1" çTAG
+
+"ALTERA«√O NO CENTRO DE GRAVIDADE DO NAVIO (REDU«√O DO GZ)"
+'GG1 = (bb1 * v * ë)/õ' DEF
+GG1 EVAL "GG1" çTAG
+'GZ1 = GZ - GG1'
+
+"CASO O PROFESSOR PE«A O FATOR C"
+"momento de inÈrcia do tanque"
+'iTQ = (l*b^3)/12' DEF
+iTQ EVAL "iTQ" çTAG
+'C = (GG1 * õ)/(ë * iTQ)' DEF 
+C EVAL "C" çTAG
+
+ª

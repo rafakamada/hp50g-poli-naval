@@ -1,0 +1,14 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+"ESCORREGAMENTO"
+'N1 = (60*f)/p'
+"p:PARES DE POLO"
+'s = 1 - N2/N1'
+"N2: GIRO DO ROTOR"
+»

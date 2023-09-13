@@ -1,0 +1,20 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«
+CLEAR
+
+
+'X2 = (k2*F0)/((k1 + k2 - m1*š^2)*(k2 - m2*š^2) - k2^2)'
+'EQ2' STO
+
+
+{'X2','m1','m2','k1','k2','š','F0'} 'Var' STO
+
+
+
+»

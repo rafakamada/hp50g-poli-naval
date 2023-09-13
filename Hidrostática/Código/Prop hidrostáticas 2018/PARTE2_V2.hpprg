@@ -1,0 +1,146 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´ CLEAR
+'X' PURGE
+[9.56 46.05 103.66 220.63 282.57 291.57 291.54 291.54 291.54 290.84 260.51 149.57 0.58]
+'B2' STO
+
+"COL. B AREA DA BALIZA
+INSIRA CADA ELEMENTO
+DENTRO DE []
+SEPARADO POR UM
+ESPA«O (TECLA SPC)
+"
+"
+"
+INPUT OBJç 'B2' STO
+
+
+
+
+"CALADO DE OPERA«√O"
+"
+"
+INPUT OBJç 'T' STO
+
+
+
+
+
+
+"KG
+SE NAO SOUBER
+DIGITAR A LETRA X"
+"
+"
+INPUT OBJç 'KG' STO
+
+
+
+
+
+
+0 105 - SF @ATIVA O APPROX
+"COEFICIENTES DE SIMPSON"
+C
+
+
+
+"COLUNA D: B*C"
+B2 C HADAMARD DUP
+'D' STO
+
+
+
+
+"COLUNA E: POSICAO RELATIVA A S MESTRA"
+E
+
+"COLUNA F: D*E"
+D E HADAMARD DUP
+'F' STO
+
+
+"SOMAT”RIAS"
+"Ö1: COLUNA D"
+D AXL ÖLIST DUP
+'Ö1' STO
+
+
+"Ö2: COLUNA F"
+F AXL ÖLIST DUP
+'Ö2' STO
+
+ 
+"PROPRIEDADES"
+'Ç = (s/3) * Ö1'
+'(s/3) * Ö1' EVAL DUP
+'Ç' STO
+"Ç[m^3]" çTAG
+
+
+'õ = ó*g*Ç'
+'ó*9.81*Ç/10' EVAL DUP
+'õ' STO
+"õ[t]" çTAG
+
+
+
+'LCB = s *(Ö2/Ö1)'
+'s *(Ö2/Ö1)' EVAL DUP
+'LCB' STO
+"LCB[m]" çTAG
+
+
+
+'BML = IL/Ç'
+'IL/Ç' EVAL DUP
+'BML' STO
+"BML[m]" çTAG
+
+
+'BMT = IT/Ç'
+'IT/Ç' EVAL DUP
+'BMT' STO
+"BMT[m]" çTAG
+
+
+B2 TAM 2/ GET 'ASECMESTRA' STO
+
+'CP = Ç/(L*ASECMESTRA)'
+'Ç/(L*ASECMESTRA)' EVAL DUP
+'CP' STO
+"CP" çTAG
+
+
+@"O CB VAI DEPENDER DE QUAL CALADO VAI OPERAR"
+'CB = Ç/(L*B*T)'
+'Ç/(L*b*T)' EVAL DUP
+'CB' STO
+"CB" çTAG
+
+
+@"O KB [m] VAI DEPENDER DE QUAL CALADO VAI OPERAR"
+'KB = T * (AWL/(AWL + (Ç/T)))'
+'T * (AWL/(AWL + (Ç/T)))' EVAL DUP
+'KB' STO
+"KB" çTAG
+
+
+'GML = BMT - KG + KB'
+'BMT - KG + KB' EVAL DUP
+'GML' STO
+"GML" çTAG
+
+'MTcm = (õ*GML)/(100 *L)'
+'(õ*GML)/(100 *L)' EVAL DUP
+'MTcm' STO
+"MTcm" çTAG
+
+
+ª

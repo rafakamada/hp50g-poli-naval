@@ -1,0 +1,40 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´ RAD
+
+@INICIAR O PROGRAMA COM O TENSOR NA PILHA
+
+DUP 
+SIZE 1 GET 'n' STO
+DUP 'ò' STO
+
+JORDAN  DROP DROP DROP 'CARAC' STO
+
+"POLIN‘MIO CARACTERÕSTICO"
+CARAC
+
+
+ò EGV
+'ñ' STO
+@AUTOVETORES
+çCOL çLIST 'AVET' STO
+
+1 n
+FOR K
+'AVET(K)' EVAL DUP SNRM /
+NEXT
+
+n COLç 'DIRS' STO
+
+"TENS’ES PRINCIPAIS (AUTOVALORES)"
+ñ
+"DIRE«’ES PRINCIPAIS (VETORES COLUNA)"
+"(resolver o sistema ò-ñI=0 para cada ñ)"
+DIRS
+
+ª

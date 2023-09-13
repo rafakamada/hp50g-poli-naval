@@ -1,0 +1,254 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´
+0 105 - SF @ATIVA O APPROX
+
+
+CLEAR
+DEG
+
+
+
+
+
+"PERDA DE FLUTUABILIDADE"
+{
+{ "L" "COMPRIMENTO EM METROS"  }
+{ "B" "BOCA EM METROS"  }
+{ "H" "CALADO EM METROS"  }
+{ "KG" "ALTURA DO CG EM METROS"  }
+{ "ANTEPARA" "DIST¬NCIA ENTRE ANTEPARAS"  }
+{ "LONGITUDINAL" "A. LONGITUDINAL (0 NAO, 1 SIM)"  }
+{ "D" "POSI«√O TQ EM RELA«AO A MEIA NAU"  }
+{ "µ" "PERMEABILIDADE DO V1 EM %"  }
+{ "µ_s" "PERM. DA SUPERFÕCIE %(0 A 100)"  }
+}
+3
+{ }
+{ }
+INFORM DROP
+
+{'L','B','H','KG','Lc','LONG','D','µ','µs'} STO
+
+
+
+'µ/100' EVAL 'µ' STO
+'µs/100' EVAL 'µs' STO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"·rea mÈdia entre linhas d'·gua"
+'A = B * L'
+'B * L' EVAL DUP 'A' STO
+"A" çTAG
+
+
+"volume do compartimento"
+'B *( 1 - LONG/2)' EVAL 'Bc' STO
+'v1 = Bc*Lc*H' 
+'Bc*Lc*H' EVAL DUP 'v1' STO
+"v1" çTAG
+
+"·rea do compartimento"
+'a = Bc * Lc'
+'Bc * Lc' EVAL DUP 'a' STO
+"a" çTAG
+
+"CALADO M…DIO FINAL"
+'H1 = (µ*v1)/(A-µs*a) + H'
+'(µ*v1)/(A-µs*a) + H' EVAL DUP 'H1' STO
+"H1" çTAG
+
+"DESLOCAMENTO"
+'Ç = L*B*H'
+'L*B*H' EVAL DUP 'Ç' STO
+"Ç" çTAG
+
+
+"KB antes da avaria"
+'KB = H/2'
+'H/2' EVAL DUP 'KB' STO
+"KB" çTAG
+
+
+"KB apÛs a avaria"
+'KB1 = H1/2'
+'H1/2' EVAL DUP 'KB1' STO
+"KB1" çTAG
+
+"BB1"
+'BB1 = KB1 - KB'
+'KB1 - KB' EVAL DUP 'BB1' STO
+"BB1" çTAG
+
+IF 'LONG == 1' THEN
+   "ETAPA DE C¡LCULO DE BANDA ï"
+   
+   "momento de inÈrcia transversal"
+   'IT = (L*B^3)/12'      
+   '(L*B^3)/12' EVAL DUP 'IT' STO
+   "IT" çTAG
+   
+   "raio metacÍntrico transversal"
+   'BMT = IT/Ç'
+   'IT/Ç' EVAL DUP 'BMT' STO
+   "BMT" çTAG      
+   
+   "altura metacÍntrica transversal"
+   'GMT = KB + BMT - KG'   
+   'KB + BMT - KG' EVAL DUP 'GMT' STO
+   "GMT" çTAG   
+   
+   "momento de inercia transveral do compartimento"
+   'iT = (Lc*Bc^3)/12'
+   '(Lc*Bc^3)/12' EVAL DUP 'iT' STO
+   "iT" çTAG   
+   
+   
+   "rT: dist‚ncia entre o centro do compartimento e o eixo longitudinal"
+   'rT = Bc/2'
+   'Bc/2' EVAL DUP 'rT' STO
+   "rT" çTAG      
+   
+   "qT: dist‚ncia entre o eixo transversal novo e o velho"
+   'qT = (µs*a*rT)/(A-µs*a)'  
+   '(µs*a*rT)/(A-µs*a)' EVAL DUP 'qT' STO
+   "qT" çTAG
+   
+   "momento de inÈrcia transversal apÛs a avaria"   
+   'IT1 = IT + qT^2 * A - µs * iT - µs * a * (rT + qT)^2'
+   'IT + qT^2 * A - µs * iT - µs * a * (rT + qT)^2' EVAL DUP 'IT1' STO
+   "IT1" çTAG   
+       
+   "BMT apÛs a avaria"
+   'B1M1T = IT1/Ç'          
+   'IT1/Ç' EVAL DUP 'B1M1T' STO
+   "B1M1T" çTAG   
+
+   "nova altura metacÍntrica transversal"
+   'GMT1 = GMT + BB1 + B1M1T - BMT'   
+   'GMT + BB1 + B1M1T - BMT' EVAL DUP 'GMT1' STO
+   "GMT1" çTAG
+
+
+   "¬NGULO BANDA"
+   'ï = ATAN((µ * v1 *(rT + qT))/(Ç * GMT1))'      
+   'ATAN((µ * v1 *(rT + qT))/(Ç * GMT1))' EVAL DUP 'ï' STO
+   "ï[GRAUS]" çTAG
+ELSE
+    "N√O H¡ BANDA, POIS N√O H¡ ANTEPARA LONGITUDINAL"   
+END
+
+IF 'D ==0' THEN
+   "N√O H¡ TRIM, POIS O COMPARTIMENTO AVARIADO … CENTRAL"
+   ELSE   
+
+   "ETAPA DE C¡LCULO DE TRIM"
+
+   "momento de inÈrcia longitudinal"
+   'IL = (B*L^3)/12'
+   '(B*L^3)/12' EVAL DUP 'IL' STO
+   "IL" çTAG
+
+
+   "raio metacÍntrico longitudinal"
+   'BML = IL/Ç'
+   'IL/Ç' EVAL DUP 'BML' STO
+   "BML" çTAG
+
+   "altura metacÍntrica longitudinal"
+   'GML = KB + BML - KG'
+   'KB + BML - KG' EVAL DUP 'GML' STO
+   "GML" çTAG
+
+   "momento de inercia longitudinal do compartimento"
+   'iL = (Bc*Lc^3)/12'
+   '(Bc*Lc^3)/12' EVAL DUP 'iL' STO
+   "iL" çTAG
+
+
+   "rL: dist‚ncia entre o centro do compartimento e a MEIA NAU"
+   'rL = (D - 1) *Lc  + Lc/2' DEF DROP
+   rL EVAL "rL" çTAG
+
+   
+   "qL: dist‚ncia entre o LCF novo e o velho"
+   'qL = (µs*a*rL)/(A-µs*a)'
+   '(µs*a*rL)/(A-µs*a)' EVAL DUP 'qL' STO
+   "qL" çTAG
+
+   "momento de inÈrcia longitudinal apÛs a avaria"
+   'IL1 = IL + qL^2 * A - µs * iL - µs * a * (rL + qL)^2'
+   'IL + qL^2 * A - µs * iL - µs * a * (rL + qL)^2' EVAL DUP 'IL1' STO
+   "IL1" çTAG
+
+   "BML apÛs a avaria"
+   'B1M1L = IL1/Ç'
+   'IL1/Ç' EVAL DUP 'B1M1L' STO
+   "B1M1L" çTAG
+
+   "nova altura metacÍntrica transversal"
+   'GML1 = GML + BB1 + B1M1L - BML'
+   'GML + BB1 + B1M1L - BML' EVAL DUP 'GML1' STO
+   "GML1" çTAG
+
+   "¬NGULO DE TRIM"
+   'ô = ATAN((µ * v1 *(rL + qL))/(Ç * GML1))'
+   'ATAN((µ * v1 *(rL + qL))/(Ç * GML1))' EVAL DUP 'ô' STO
+   "ô[GRAUS]" çTAG 
+
+   "TRIM"
+   't = L *TAN(ô)'
+   'L *TAN(ô)' EVAL DUP 't' STO
+   "t[METROS]" çTAG
+
+   "calado a rÈ"
+   'Hr = H1- (L/2)*TAN(ô)'
+   'H1 -(L/2)*TAN(ô)' EVAL DUP 'Hr' STO
+   "Hr" çTAG
+
+   "calado a vante"
+   'Hv = H1+(L/2)*TAN(ô)'
+   'H1 + (L/2)*TAN(ô)' EVAL DUP 'Hv' STO
+   "Hv" çTAG   
+   "TALVEZ ESTEJAM TROCADOS, VEJA QUAL FAZ MAIS SENTIDO"   
+END
+
+ª

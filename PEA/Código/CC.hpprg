@@ -1,0 +1,63 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´
+CLEAR 
+
+@INPUTS
+3 'm' STO
+4 'n' STO
+'m + n -1' EVAL 'r' STO
+
+
+{-1 3 4}
+{6 -3 -2}
+{2 -4 5}
+m çLIST 'MALHAS' STO
+
+[0 4 'I1']
+[-50 0 'I2']
+[0 3 'I3']
+[0 2 'I4']
+[0 4 'I5']
+[-40 0 'I6']
+r ROWç  'RAMOS' STO
+
+'-I1 - I6- I3'
+'I3 - I2 - I4'
+'I1 + I4 + I5'
+'I2 - I5 + I6'
+n çARRY  'NOS' STO
+
+@FIM DOS INPUTS
+
+
+
+@SOMAR VOLTAGEM NAS MALHAS
+1 m
+FOR K
+    'MALHAS(K)' EVAL DUP 'MALHA' STO SIZE 'TAM' STO
+    0
+    1 TAM
+    FOR J
+        'ABS(MALHA(J))' EVAL 'RAMO' STO    
+        'RAMOS(RAMO, 1) 
+        - RAMOS(RAMO, 2)*RAMOS(RAMO, 3)'    
+        EVAL
+        IF 'MALHA(J) >0 ' THEN
+           +
+        ELSE
+            -        
+        END                
+    NEXT
+                
+NEXT
+NOS OBJç DROP
+'n+m' EVAL çARRY
+['I1' 'I2' 'I3' 'I4' 'I5' 'I6']
+LINSOLVE
+ª

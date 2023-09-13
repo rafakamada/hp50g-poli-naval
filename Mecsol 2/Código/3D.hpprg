@@ -1,0 +1,40 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ VersiÛn:
+@ Creado con HPUserEdit 6
+
+´ RAD
+CLEAR
+@EQUA«√O CARACTERISTICA
+
+[[57 0 24] [0 50 0] [24 0 43]] DUP 'ò' STO
+JORDAN  DROP DROP DROP 'CARAC' STO
+
+@AUTOVALORES
+ò EGV 
+'ñ' STO
+
+@AUTOVETORES
+çCOL çLIST 'AVET' STO
+
+'AVET(1)' EVAL DUP SNRM /
+'AVET(2)' EVAL DUP SNRM /
+'AVET(3)' EVAL DUP SNRM /
+3 COLç 'DIRS' STO
+
+"POL CARACTERÕSTICO"
+CARAC
+"TENS’ES PRINCIPAIS"
+ñ
+"DIRE«’ES PRINCIPAIS (VETORES COLUNA)"
+"resolver o sistema ò-ñI=0 para cada ñ"
+DIRS
+
+
+"VON MISES"
+ñ Vç 'ò3' STO 'ò2' STO 'ò1' STO
+'ò0 = (1/É2)*É((ò1-ò2)^2 + (ò2 - ò3)^2 + (ò1-ò3)^2)'
+
+ª

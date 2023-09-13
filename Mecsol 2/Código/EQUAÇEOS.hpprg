@@ -1,0 +1,61 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+DIR EQS
+« DEG
+{-98 -97 -120} SF @VETORES VERTICXAIS
+
+
+'˜MED = (˜X + ˜Y)/2'
+'˜MAX = (˜X + ˜Y)/2 +ƒ(((˜X-˜Y)/2)^2 + ™XY^2)'
+'˜MIN = (˜X + ˜Y)/2 -ƒ(((˜X-˜Y)/2)^2 + ™XY^2)'
+'TAN(2*•P) = (2*™XY)/(˜X-˜Y)'
+'™MAX = ƒ(((˜X-˜Y)/2)^2 +™XY^2)'
+'TAN(2*•C) = -(˜X-˜Y)/(2*™XY)'
+6 LIST 'PLAN' STO
+
+[['COS(•)' 'SIN(•)'] ['-SIN(•)' 'COS(•)']]
+'ß' STO
+
+ß TRAN 'ßT' STO
+
+'˜T = P*(r/t)'
+'˜L = P*(r/2*t)'
+2 LIST 'VASO' STO
+
+
+'“X = (1/E)*(˜X - v*(˜Z + ˜Y))' 
+'“Y = (1/E)*(˜Y - v*(˜Z + ˜X))'
+'“Z = (1/E)*(˜Z - v*(˜X + ˜Y))'
+3 LIST
+'HOOKE' STO
+
+'˜0 = (1/ƒ2)*ƒ((˜1-˜2)^2 + (˜2 - ˜3)^2 + (˜1-˜3)^2)'
+'VMISES' STO
+
+'˜X2 = (˜X + ˜Y)/2 + ((˜X - ˜Y)/2)*COS(2*•) + ™XY*SIN(2*•)'
+'˜Y2 = (˜X + ˜Y)/2 - ((˜X - ˜Y)/2)*COS(2*•) - ™XY*SIN(2*•)'
+'™X2Y2 = - ((˜X - ˜Y)/2)*SIN(2*•) +™XY*COS(2*•)'
+3 LIST
+'ROTT' STO 
+
+'“X2 = (“X + “Y)/2 + ((“X - “Y)/2)*COS(2*•) + (‘XY)/2*SIN(2*•)'
+'“Y2 = (“X + “Y)/2 - ((“X - “Y)/2)*COS(2*•) - (‘XY)/2*SIN(2*•)'
+'‘X2Y2 = - ((“X - “Y)/2)*SIN(2*•) +‘XY*COS(2*•)'
+3 LIST
+'ROTD' STO 
+
+
+
+'“MED = (“X + “Y)/2'
+'‘MAX = ƒ((“X-“Y)^2 +‘XY^2)'
+'“MAX = “MED + ‘MAX/2'
+'“MIN = “MED - ‘MAX/2'
+'TAN(2*•P) = (‘XY)/(“X-“Y)'
+5 LIST 'PLAND' STO
+
+»

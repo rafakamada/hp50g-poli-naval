@@ -1,0 +1,23 @@
+%%HP: T(0)A(D)F(.);
+@ Argumentos:
+@ Autor:
+@ E-mail:
+@ Versión:
+@ Creado con HPUserEdit 6
+
+«  @LEMBRAR DE APAGAR O CLEAR
+DEG CYLIN
+"AS TENSÕES DE
+LINHA E DE
+FASE SÃO IGUAIS"
+
+{'Ia´b´'} PURGE
+(1 €120) 'Œ' STO
+
+'Ia´b´' {'Œ^2' 'Œ'}  *
+
+{'Ib´c´' 'Ic´a´'} STO
+
+'Ia´b´'{'1 - Œ' 'Œ^2 - 1' 'Œ - Œ^2'} *
+{'Iaa´' 'Ibb´' 'Icc´'} STO
+»
